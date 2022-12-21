@@ -17,7 +17,7 @@ export default {
       options: {
         // manage.sanity.io, click on project
         projectId: '5m494i71',
-        data: 'production',
+        dataset: 'production',
         // when in development mode, and you make a change to your sanity cms, on save it will automatically be updated inside of gatsby. That way you don't have to rebuild the entire thing.
         watchMode: true,
         // settings... api... add new token...
@@ -25,4 +25,7 @@ export default {
       },
     },
   ],
+  flags: {
+    THE_FLAG: false,
+  },
 };

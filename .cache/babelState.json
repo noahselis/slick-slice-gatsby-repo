@@ -11,6 +11,12 @@
           "stage": "develop",
           "options": {
             "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "pure": false,
             "ssr": false
           }
         },
@@ -31,7 +37,10 @@
         {
           "name": "/Users/noahselis/coding/master-gatsby/gatsby/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -63,6 +72,12 @@
           "stage": "develop-html",
           "options": {
             "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "pure": false,
             "ssr": false
           }
         }
@@ -71,7 +86,10 @@
         {
           "name": "/Users/noahselis/coding/master-gatsby/gatsby/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -103,6 +121,12 @@
           "stage": "build-html",
           "options": {
             "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "pure": false,
             "ssr": true
           }
         }
@@ -111,7 +135,10 @@
         {
           "name": "/Users/noahselis/coding/master-gatsby/gatsby/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -143,6 +170,12 @@
           "stage": "build-javascript",
           "options": {
             "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "pure": false,
             "ssr": true
           }
         }
@@ -151,7 +184,10 @@
         {
           "name": "/Users/noahselis/coding/master-gatsby/gatsby/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
