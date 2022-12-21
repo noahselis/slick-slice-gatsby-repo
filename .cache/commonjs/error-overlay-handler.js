@@ -1,20 +1,26 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 exports.__esModule = true;
 exports.errorMap = exports.reportError = exports.clearError = void 0;
-const overlayPackage = process.env.GATSBY_HOT_LOADER !== `fast-refresh` ? require(`react-error-overlay`) : require(`@pmmmwh/react-refresh-webpack-plugin/overlay`);
+
+var ReactRefreshErrorOverlay = _interopRequireWildcard(require("@pmmmwh/react-refresh-webpack-plugin/overlay"));
+
+var ReactErrorOverlay = _interopRequireWildcard(require("react-error-overlay"));
+
 const ErrorOverlay = {
-  showCompileError: process.env.GATSBY_HOT_LOADER !== `fast-refresh` ? overlayPackage.reportBuildError : overlayPackage.showCompileError,
-  clearCompileError: process.env.GATSBY_HOT_LOADER !== `fast-refresh` ? overlayPackage.dismissBuildError : overlayPackage.clearCompileError
+  showCompileError: process.env.GATSBY_HOT_LOADER !== `fast-refresh` ? ReactErrorOverlay.reportBuildError : ReactRefreshErrorOverlay.showCompileError,
+  clearCompileError: process.env.GATSBY_HOT_LOADER !== `fast-refresh` ? ReactErrorOverlay.dismissBuildError : ReactRefreshErrorOverlay.clearCompileError
 };
 
 if (process.env.GATSBY_HOT_LOADER !== `fast-refresh`) {
   // Report runtime errors
-  overlayPackage.startReportingRuntimeErrors({
+  ReactErrorOverlay.startReportingRuntimeErrors({
     onError: () => {},
     filename: `/commons.js`
   });
-  overlayPackage.setEditorHandler(errorLocation => window.fetch(`/__open-stack-frame-in-editor?fileName=` + window.encodeURIComponent(errorLocation.fileName) + `&lineNumber=` + window.encodeURIComponent(errorLocation.lineNumber || 1)));
+  ReactErrorOverlay.setEditorHandler(errorLocation => window.fetch(`/__open-stack-frame-in-editor?fileName=` + window.encodeURIComponent(errorLocation.fileName) + `&lineNumber=` + window.encodeURIComponent(errorLocation.lineNumber || 1)));
 }
 
 const errorMap = {};

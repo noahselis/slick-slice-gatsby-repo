@@ -13,6 +13,7 @@ export default {
     'gatsby-plugin-styled-components',
     {
       // this is the name of the plug in you are adding
+      // when it comes to sourcing data from a wordpress backend, you'll want this plug in: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-wordpress/docs/why-use-this-plugin.md
       resolve: 'gatsby-source-sanity',
       options: {
         // manage.sanity.io, click on project
@@ -25,7 +26,4 @@ export default {
       },
     },
   ],
-  flags: {
-    THE_FLAG: false,
-  },
 };
