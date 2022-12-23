@@ -4,11 +4,11 @@ import React from 'react';
 import PizzaList from '../components/PizzaList';
 import ToppingsFilter from '../components/ToppingsFilter';
 
-export default function PizzaPage({ data }) {
+export default function PizzaPage({ data, pageContext }) {
   const pizzas = data.pizzas?.nodes;
   return (
     <>
-      <ToppingsFilter />
+      <ToppingsFilter activeTopping={pageContext.topping} />
       <PizzaList pizzas={pizzas} />
     </>
   );
@@ -17,8 +17,10 @@ export default function PizzaPage({ data }) {
 // page query. what you call the constant doesn't matter. some folks like to call that variable pageQuery
 // what goes in the back ticks is what you define in the GraphiQL gui. so, what shape do you want your data to come back to you and be saved in that query variable?
 export const getAllPizzas = graphql`
-  query GetAllPizzas {
-    pizzas: allSanityPizza {
+  query GetAllPizzas($topping: [String]) {
+    pizzas: allSanityPizza(
+      filter: { toppings: { elemMatch: { name: { in: $topping } } } }
+    ) {
       nodes {
         name
         id
