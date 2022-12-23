@@ -37,16 +37,18 @@ export default function PizzaList({ pizzas }) {
 
 function SinglePizza({ pizza }) {
   return (
-    <PizzaStyles>
-      <Link to={`/pizza/${pizza.slug.current}`}>
-        <h2>
-          <span className="mark">{pizza.name}</span>
-        </h2>
-      </Link>
-      <p>{pizza.toppings.map((topping) => topping.name).join(', ')}</p>
-      {/* the prop 'fluid' is a Gatsby-specific prop that makes the image responsive */}
-      {/* using 'fixed' images requires changing fluid to fixed */}
-      <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
-    </PizzaStyles>
+    <>
+      <PizzaStyles>
+        <Link to={`/pizza/${pizza.slug.current}`}>
+          <h2>
+            <span className="mark">{pizza.name}</span>
+          </h2>
+        </Link>
+        <p>{pizza.toppings.map((topping) => topping.name).join(', ')}</p>
+        {/* the prop 'fluid' is a Gatsby-specific prop that makes the image responsive */}
+        {/* using 'fixed' images requires changing fluid to fixed */}
+        <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
+      </PizzaStyles>
+    </>
   );
 }
