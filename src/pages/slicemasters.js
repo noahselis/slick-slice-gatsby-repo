@@ -43,6 +43,7 @@ export default function SliceMasters({ data }) {
   console.log(slicemasters);
   return (
     <>
+      <>{process.env.GATSBY_PAGE_SIZE}</>
       <SliceMasterGrid>
         {slicemasters.map((person) => (
           <SliceMasterStyles key={person.id}>
@@ -61,9 +62,13 @@ export default function SliceMasters({ data }) {
 }
 
 // 1. query the data
+// hott tipp: any data that is passed via context in ur gatsby-node file is available in ur graphql query as long as you specify it in the query with arguments
+// for example in this query, we've set it up to accept variables passed via context and given them default values.
+// we then pass them down to the specific query that we want to use those values, in this case the slicemasters query.
+// limit and skip are two 'functions' of sorts that have access to in graphql and you can find those in graphiql
 export const query = graphql`
-  query {
-    slicemasters: allSanityPerson {
+  query($skip: Int = 0, $pageSize: Int = 2) {
+    slicemasters: allSanityPerson(limit: $pageSize, skip: $skip) {
       totalCount
       nodes {
         id
