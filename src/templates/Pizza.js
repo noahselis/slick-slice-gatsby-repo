@@ -22,7 +22,6 @@ export default function SinglePizzaPage({ data: { pizza } }) {
           ))}
         </ul>
       </div>
-      single pizza
     </PizzaGrid>
   );
 }
