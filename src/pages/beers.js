@@ -14,8 +14,6 @@ const SingleBeerStyles = styled.div`
   padding: 2rem;
   text-align: center;
   img {
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 200px;
     object-fit: contain;

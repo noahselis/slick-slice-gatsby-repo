@@ -62,47 +62,7 @@ async function turnToppingsIntoPages({ graphql, actions }) {
   });
 }
 
-async function turnBeersIntoPages({ graphql, actions }) {
-  // 1. make a page template const
-  const beerTemplate = path.resolve('./src/pages/beers.js');
-  // 2. query the beers
-  const { data } = await graphql(`
-    query {
-      beers: allBeer {
-        nodes {
-          id
-          image
-          name
-          price
-          rating {
-            average
-            reviews
-          }
-        }
-      }
-    }
-  `);
-  // 3. loop over each beer and display info on beers.js
-  data.beers.nodes.forEach((beer) => {
-    actions.createPage({
-      component: beerTemplate,
-      path: `beer/${beer.id}`,
-      context: {
-        id: beer.id,
-        image: beer.image,
-        name: beer.name,
-        price: beer.price,
-        rating: beer.rating,
-      },
-    });
-  });
-}
-
-async function fetchBeersAndTurnIntoNodes({
-  actions,
-  createNodeId,
-  createContentDigest,
-}) {
+async function fetchBeersAndTurnIntoNodes({ actions, createContentDigest }) {
   // 1. fetch a list of beers
   const res = await fetch('https://api.sampleapis.com/beers/ale');
   const beers = await res.json();
@@ -142,10 +102,8 @@ export async function createPages(params) {
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
-    turnBeersIntoPages(params),
   ]);
   // 1. pizzas
   // 2. toppings
-  // 3. beers
   // 4. slice masters
 }
