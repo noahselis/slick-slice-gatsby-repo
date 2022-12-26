@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 
 const SliceMasterGrid = styled.div`
   display: grid;
@@ -44,6 +45,7 @@ export default function SliceMasters({ data, pageContext }) {
   console.log(pageContext);
   return (
     <>
+      <SEO title={`Slicemasters - Page ${pageContext.currentPage}`} />
       <Pagination
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
         totalCount={data.slicemasters.totalCount}
@@ -54,7 +56,7 @@ export default function SliceMasters({ data, pageContext }) {
       <SliceMasterGrid>
         {slicemasters.map((person) => (
           <SliceMasterStyles key={person.id}>
-            <Link to={`/slicemasters/${person.slug.current}`}>
+            <Link to={`${person.slug.current}`}>
               <h2>
                 <span className="mark">{person.name}</span>
               </h2>
@@ -69,7 +71,7 @@ export default function SliceMasters({ data, pageContext }) {
 }
 
 // 1. query the data
-// hott tipp: any data that is passed via context in ur gatsby-node file is available in ur graphql query as long as you specify it in the query with arguments
+// hott tipp: any data that is passed via context in ur gatsby-node file is available in ur graphql query as long as you specify it in the query with arguments.
 // for example in this query, we've set it up to accept variables passed via context and given them default values.
 // we then pass them down to the specific query that we want to use those values, in this case the slicemasters query.
 // limit and skip are two 'functions' of sorts that have access to in graphql and you can find those in graphiql

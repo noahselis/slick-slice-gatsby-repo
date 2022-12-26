@@ -1,4 +1,4 @@
-import path from 'path';
+import path, { resolve } from 'path';
 import fetch from 'isomorphic-fetch';
 
 async function turnPizzasIntoPages({ graphql, actions }) {
@@ -93,14 +93,15 @@ export async function sourceNodes(params) {
 }
 
 async function turnSliceMastersIntoPages({ graphql, actions }) {
-  // 1. Query all slicemasters
+  // 1. create template for dynamic slicemasters page
+  // 2. Query all slicemasters
   const { data } = await graphql(`
     query {
-      sliceMasters: allSanityPerson {
+      slicemasters: allSanityPerson {
         totalCount
         nodes {
-          name
           id
+          name
           slug {
             current
           }
@@ -108,14 +109,24 @@ async function turnSliceMastersIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // TODO: 2. turn each sliceMaster into a page
-  // 3. figure out how many pages there are based on how many slicemasters there are, and how many per page
+  // TODO: 3. turn each sliceMaster into a page
+  data.slicemasters.nodes.forEach((slicemaster) => {
+    actions.createPage({
+      component: resolve(`./src/templates/Slicemaster.js`),
+      path: `/slicemasters/${slicemaster.slug.current}`,
+      context: {
+        name: slicemaster.person,
+        slug: slicemaster.slug.current,
+      },
+    });
+  });
+  // 4. figure out how many pages there are based on how many slicemasters there are, and how many per page
   const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE); // env variables are strings, which is odd, so we have to wrap this whole thing in a parseInt
-  const pageCount = Math.ceil(data.sliceMasters.totalCount / pageSize);
+  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
   console.log(
-    `there are ${data.sliceMasters.totalCount} total people and we have ${pageCount} pages with ${pageSize} per page`
+    `there are ${data.slicemasters.totalCount} total people and we have ${pageCount} pages with ${pageSize} per page`
   );
-  // 4. loop from 1 to x and create the pages for them
+  // 5. loop from 1 to x and create the pages for them
   Array.from({ length: pageCount }).forEach((_, index) => {
     console.log(`creating page ${index}`);
     actions.createPage({

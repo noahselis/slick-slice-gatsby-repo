@@ -40,8 +40,6 @@ export default function Pagination({
   const hasNextPage = nextPage <= totalPages;
   const hasPrevPage = prevPage >= 1;
 
-  console.log({ totalPages });
-
   return (
     <PaginationStyles>
       <Link disabled={!hasPrevPage} to={`${base}/${prevPage}`}>
@@ -49,6 +47,7 @@ export default function Pagination({
       </Link>
       {Array.from({ length: totalPages }).map((_, i) => (
         <Link
+          key={i}
           className={currentPage === 1 && i === 0 ? 'current' : ''}
           to={`${base}/${i > 0 ? i + 1 : ''}`}
         >

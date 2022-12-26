@@ -30,7 +30,6 @@ const ContentStyles = styled.div`
 `;
 
 export default function Layout({ children }) {
-  console.log(children);
   return (
     <>
       <GlobalStyles />

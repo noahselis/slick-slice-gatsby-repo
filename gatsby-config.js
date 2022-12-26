@@ -7,6 +7,7 @@ export default {
     title: `Slick's Slices`,
     siteUrl: 'https://gatsby.pizza',
     description: 'The best pizza place in Hamilton',
+    twitter: '@slicksSlices',
   },
   plugins: [
     // this plugin is a styled components plugin that surfaces the critical css to gastby so that it can load that first on render
@@ -25,5 +26,6 @@ export default {
         token: process.env.SANITY_TOKEN,
       },
     },
+    'gatsby-plugin-react-helmet',
   ],
 };
