@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const OrderContext = React.createContext();
 
 export function OrderProvider({ children }) {
-  // we need state in here
+  // we need order state in here
   const [order, setOrder] = useState([]);
   return (
     <OrderContext.Provider value={[order, setOrder]}>
