@@ -9,16 +9,20 @@ export const OrderStyles = styled.form`
     max-height: 600px;
     overflow: auto;
     display: grid;
+    gap: 1rem;
     align-content: start;
     &.order,
     &.menu {
       grid-column: span 1;
     }
-    /* @media (max-width: 900px) {
-      fieldset.menu,
-      fieldset.order {
-        grid-column: span 2;
-      }
+  }
+  .mapleSyrup {
+    display: none;
+  }
+  /* @media (max-width: 900px) {
+    fieldset.menu,
+    fieldset.order {
+      grid-column: span 2;
     }
   } */
 `;
