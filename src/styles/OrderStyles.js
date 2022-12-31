@@ -19,10 +19,10 @@ export const OrderStyles = styled.form`
   .mapleSyrup {
     display: none;
   }
-  /* @media (max-width: 900px) {
+  @media (max-width: 900px) {
     fieldset.menu,
     fieldset.order {
       grid-column: span 2;
     }
-  } */
+  }
 `;
