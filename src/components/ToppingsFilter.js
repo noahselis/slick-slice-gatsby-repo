@@ -27,7 +27,6 @@ const ToppingStyles = styled.div`
 
 function countPizzasInToppings(pizzas) {
   // return the pizzas with counts
-  console.log(pizzas);
   const counts = pizzas
     .map((pizza) => pizza.toppings)
     .flat()
@@ -71,7 +70,6 @@ export default function ToppingsFilter({ activeTopping }) {
   // get a list of all the pizzas with their toppings
   // count how many pizzas are in each topping
   const toppingsWithCounts = countPizzasInToppings(pizzas.nodes);
-  console.log({ toppingsWithCounts });
   // loop over the list of toppings and display the topping and the count of pizzas in that topping
   // link it up
 

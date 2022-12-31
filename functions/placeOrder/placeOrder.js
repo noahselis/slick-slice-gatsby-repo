@@ -53,7 +53,6 @@ exports.handler = async (event, context) => {
   const requiredFields = ['email', 'name', 'order'];
 
   for (const field of requiredFields) {
-    console.log(`Checking that ${field} is good`);
     if (!body[field]) {
       return {
         statusCode: 400,
@@ -85,7 +84,6 @@ exports.handler = async (event, context) => {
     subject: 'New order!',
     html: generateOrderEmail({ order: body.order, total: body.total }),
   });
-  console.log(info);
   return {
     statusCode: 200,
     body: JSON.stringify({ message: 'Success' }),

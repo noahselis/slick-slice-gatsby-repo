@@ -30,7 +30,6 @@ export default function usePizza({ pizzas, values }) {
   // this is the function that is run when somebody submits the form
   async function submitOrder(e) {
     e.preventDefault();
-    console.log(e);
     setLoading(true);
     setError(null);
     setMessage(null);
@@ -53,7 +52,6 @@ export default function usePizza({ pizzas, values }) {
         body: JSON.stringify(body),
       }
     );
-    console.log(res);
     const text = JSON.parse(await res.text());
 
     // check if everything worked

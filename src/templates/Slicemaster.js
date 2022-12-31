@@ -7,7 +7,6 @@ import SEO from '../components/SEO';
 // the pagination is not playing nice with our path
 
 export default function SlicemasterPage({ data: { person } }) {
-  console.log(person);
   return (
     <>
       <SEO title={person.name} image={person.image.asset.src} />
