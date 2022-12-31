@@ -33,12 +33,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function wait(ms = 0) {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
   // Check if they have filled out the honeypot
@@ -60,16 +54,6 @@ exports.handler = async (event, context) => {
         }),
       };
     }
-  }
-
-  // make sure they actually have items in that order
-  if (!body.order.length) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: `Why would you order nothing?!`,
-      }),
-    };
   }
 
   // send the email

@@ -43,6 +43,7 @@ export default function usePizza({ pizzas, values }) {
       email: values.email,
       mapleSyrup: values.mapleSyrup,
     };
+    console.log({ body }); // the body is being sent to the function just fine...
     // 4. Send this data the a serevrless function when they check out
     const res = await fetch(
       `${process.env.GATSBY_SERVERLESS_BASE}/placeOrder`,
@@ -55,6 +56,7 @@ export default function usePizza({ pizzas, values }) {
       }
     );
     const text = JSON.parse(await res.text());
+    console.log({ text });
 
     // check if everything worked
     if (res.status >= 400 && res.status < 600) {
