@@ -2,26 +2,25 @@ const nodemailer = require('nodemailer');
 
 function generateOrderEmail({ order, total }) {
   return `<div>
-<h2>Your Recent order for ${total}</h2>
-<p>Please start walking over, we will have your order ready in the next 20 mins.</p>
-  <ul>
-    ${order
-      .map(
-        (item) => `
-    <li>
-      <img src="${item.thumbnail}" alt="${item.name}"/>
-      ${item.size} ${item.name} - ${item.price}
-    </li>`
-      )
-      .join('')}
-</ul>
-  </div>
-  <style>
-ul {
-  list-style: none;
-}
-  </style>
-  `;
+    <h2>Your Recent Order for ${total}</h2>
+    <p>Please start walking over, we will have your order ready in the next 20 mins.</p>
+    <ul>
+      ${order
+        .map(
+          (item) => `<li>
+        <img src="${item.thumbnail}" alt="${item.name}"/>
+        ${item.size} ${item.name} - ${item.price}
+      </li>`
+        )
+        .join('')}
+    </ul>
+    <p>Your total is <strong>$${total}</strong> due at pickup</p>
+    <style>
+        ul {
+          list-style: none;
+        }
+    </style>
+  </div>`;
 }
 
 // create a transport for nodemailer
@@ -42,14 +41,14 @@ function wait(ms = 0) {
 
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
-  // check if the user has filled in the honeypot
+  // Check if they have filled out the honeypot
   if (body.mapleSyrup) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Boop beep bop zzzttt good bye 34234' }),
+      body: JSON.stringify({ message: 'Boop beep bop zzzzstt good bye' }),
     };
   }
-  // validate the data coming in is correct
+  // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
 
   for (const field of requiredFields) {
@@ -68,16 +67,12 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: `Why would you order nothing?`,
+        message: `Why would you order nothing?!`,
       }),
     };
   }
 
   // send the email
-
-  // send the success on error message
-
-  // Test send an email
   const info = await transporter.sendMail({
     from: "Slick's Slices <slick@example.com>",
     to: `${body.name} <${body.email}>, orders@example.com`,

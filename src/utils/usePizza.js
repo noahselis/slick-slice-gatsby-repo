@@ -5,34 +5,36 @@ import formatMoney from './formatMoney';
 import attachNamesAndPrices from './attachNamesAndPrices';
 
 export default function usePizza({ pizzas, values }) {
-  // 1. create state to hold order
+  // 1. Create some state to hold our order
   // We got rid of this line because we moved useState up to the provider
   // const [order, setOrder] = useState([]);
-  // now we access both our state and our updater function via context
+  // Now we access both our state and our updater function (setOrder) via context
   const [order, setOrder] = useContext(OrderContext);
   const [error, setError] = useState();
-  const [loading, setLoading] = useState();
-  const [message, setMessage] = useState();
-  // 2. make a function to add things to order
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  // 2. Make a function add things to order
   function addToOrder(orderedPizza) {
     setOrder([...order, orderedPizza]);
   }
-  // 3. make a function to remove things to order
+  // 3. Make a function remove things from order
   function removeFromOrder(index) {
     setOrder([
-      // everything BEFORE the item we want to remove
+      // everything before the item we want to remove
       ...order.slice(0, index),
-      // everything AFTER the item we want to remove
-      ...order.slice(index + 1), // if you omit the second argument of slice, it will just go to the end
+      // everything after the item we want to remove
+      ...order.slice(index + 1),
     ]);
   }
 
-  // this is the function that is run when somebody submits the form
+  // this is the function that is run when someone submits the form
   async function submitOrder(e) {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setMessage(null);
+    // setMessage('Go eat!');
+
     // gather all the data
     const body = {
       order: attachNamesAndPrices(order, pizzas),
@@ -41,7 +43,7 @@ export default function usePizza({ pizzas, values }) {
       email: values.email,
       mapleSyrup: values.mapleSyrup,
     };
-    // 4. send this data to a serverless function when they check out
+    // 4. Send this data the a serevrless function when they check out
     const res = await fetch(
       `${process.env.GATSBY_SERVERLESS_BASE}/placeOrder`,
       {
@@ -61,7 +63,7 @@ export default function usePizza({ pizzas, values }) {
     } else {
       // it worked!
       setLoading(false);
-      setMessage('Success! Come on down for your pizza!');
+      setMessage('Success! Come on down for your pizza');
     }
   }
 
@@ -69,9 +71,9 @@ export default function usePizza({ pizzas, values }) {
     order,
     addToOrder,
     removeFromOrder,
-    submitOrder,
     error,
     loading,
     message,
+    submitOrder,
   };
 }
